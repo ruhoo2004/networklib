@@ -5,12 +5,17 @@
 
 int main(int argc, char **argv)
 {
-    int packet_size = 1024;
+    std::string ip_addr = "0.0.0.0";
     if (argc >= 2) {
-        packet_size = std::stoi(argv[1]);
+        ip_addr = argv[1];
+    }
+
+    int packet_size = 1024;
+    if (argc >= 3) {
+        packet_size = std::stoi(argv[2]);
     }
     
-    TCPConnection conn("127.0.0.1", 8000, false);
+    TCPConnection conn(ip_addr, 8000, false);
 
     conn.SetEventCallback([](short events) {
         if (events & BEV_EVENT_ERROR)
@@ -33,7 +38,7 @@ int main(int argc, char **argv)
             std::cout << total_messages_read << " total messages read" << std::endl;
             std::cout << (double)total_bytes_read/total_messages_read 
                 << " average message size" << std::endl;
-            std::cout << (double)total_bytes_read/(1024 * 1024 * 10000 / 1000) 
+            std::cout << (double)total_bytes_read/(1024 * 1024 * 10) 
                 << " MiB/s throughput" << std::endl;
     }, 10000);
     
