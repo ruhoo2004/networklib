@@ -6,7 +6,9 @@
 int main(int argc, char **argv)
 {
     std::string ip_addr = "0.0.0.0";
+
     if (argc >= 2) {
+        std::cout << "input ip address: " << argv[1] << std::endl;
         ip_addr = argv[1];
     }
 

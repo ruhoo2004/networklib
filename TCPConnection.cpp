@@ -57,6 +57,7 @@ bool TCPConnection::Init()
 	            evconnlistener_set_error_cb(listener, &TCPConnection::OnConnectError);
             }
         } else  {
+            std::cout << m_addr << ","<< sin.sin_addr.s_addr << std::endl;
             SetupMsgAndEventCallback(-1);
             if (bufferevent_socket_connect(m_bev, (sockaddr*)&sin, sizeof(sin)) < 0) {
                 std::cerr << "couldn't open socket" << std::endl;
