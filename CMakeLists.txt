@@ -3,7 +3,7 @@ set (CMAKE_CXX_STANDARD 11)
 project (tcpdemo)
 
 include_directories("/usr/include")
-link_directories("/usr/lib")
+link_directories("/usr/lib" "/usr/lib/x86_64-linux-gnu")
 aux_source_directory(. DIR_LIB_SRCS)
 
 add_library(TCPConnection ${DIR_LIB_SRCS})
@@ -15,3 +15,7 @@ add_executable(client client.cpp)
 target_link_libraries(client TCPConnection event)
 
 add_executable(epollserver epollserver.cpp)
+
+add_executable(asioserver asioserver.cpp)
+target_link_libraries(asioserver boost_system)
+
